@@ -1,7 +1,5 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-import datetime
-import pyodbc
 from django.conf import settings
 from sici_site.models import Dados
 
