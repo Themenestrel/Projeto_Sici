@@ -102,7 +102,7 @@ div.jumbotron {
 	box-shadow: 0 5px 10px rgba(0, 0, 0, .5);
 }
 
-div.container h3 {
+div.container {
 	text-align: center;
 	color: #0b2e13;
 	padding: 0px;
@@ -143,6 +143,7 @@ input {
 	margin-top: 50px;
 	position: scroll;
 	border: 1px solid #9fcdff;
+
 }
 
 th {
