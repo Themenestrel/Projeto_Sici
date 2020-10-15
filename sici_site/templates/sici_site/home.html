@@ -45,60 +45,168 @@
                     <button type="submit">Pesquisar<i class="fa fa-search"></i></button>
     </form>
 
-            <table class="table" id="tabela_principal">
-                <thead>
-                    <tr>
-                        <th scope="col">Código da Unidade</th>
-                        <td>{{ dados_totais.cd_ua }}</td>
-                    </tr>
-                    <tr>
-                        <th scope="col">Código da Unidade Básica</th>
-                        <td> {{ dados_totais.cd_ua_basica }} </td>
-                    </tr>
-                    <tr>
-                        <th scope="col">Nome da Unidade Básica</th>
-                        <td> {{ dados_totais.nome_ua_basica }} </td>
-                    </tr>
-                    <tr>
-                        <th scope="col">Sigla UA</th>
-                        <td> {{ dados_totais.sigla_ua }} </td>
-                    </tr>
-                    <tr>
-                        <th scope="col">Titular da Unidade</th>
-                        <td> {{ dados_totais.titular }} </td>
-                    </tr>
-                    <tr>
-                        <th scope="col">Cargo</th>
-                        <td> {{ dados_totais.cargo }} </td>
-                    </tr>
-                    <tr>
-                        <th scope="col">Endereço</th>
-                        <td> {{ dados_totais.nome_logradouro }} </td>
-                    </tr>
-                    <tr>
-                        <th scope="col">Numero</th>
-                        <td> {{ dados_totais.nro }} </td>
-                    </tr>
-                    <tr>
-                        <th scope="col">Bairro</th>
-                        <td> {{ dados_totais.bairro }} </td>
-                    </tr>
-                    <tr>
-                        <th scope="col">CEP</th>
-                        <td> {{ dados_totais.cep }} </td>
-                    </tr>
-                    <tr>
-                        <th scope="col">E-mails</th>
-                        <td> {{ dados_totais.emails }} </td>
-                    </tr>
-                    <tr>
-                        <th scope="col">Telefones</th>
-                        <td> {{ dados_totais.telefones }} </td>
-                    </tr>
-                </thead>
+                <table class="table" id="tabela_cd_ua">
+                    <thead>
+                        <tr>
+                            <th scope="col">Código da Unidade</th>
+                            <td>{{ dados_totais.cd_ua }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="col">Código da Unidade Básica</th>
+                            <td> {{ dados_totais.cd_ua_basica }} </td>
+                        </tr>
+                        <tr>
+                            <th scope="col">Nome da Unidade Básica</th>
+                            <td> {{ dados_totais.nome_ua_basica }} </td>
+                        </tr>
+                        <tr>
+                            <th scope="col">Sigla UA</th>
+                            <td> {{ dados_totais.sigla_ua }} </td>
+                        </tr>
+                        <tr>
+                            <th scope="col">Titular da Unidade</th>
+                            <td> {{ dados_totais.titular }} </td>
+                        </tr>
+                        <tr>
+                            <th scope="col">Cargo</th>
+                            <td> {{ dados_totais.cargo }} </td>
+                        </tr>
+                        <tr>
+                            <th scope="col">Endereço</th>
+                            <td> {{ dados_totais.nome_logradouro }} </td>
+                        </tr>
+                        <tr>
+                            <th scope="col">Numero</th>
+                            <td> {{ dados_totais.nro }} </td>
+                        </tr>
+                        <tr>
+                            <th scope="col">Bairro</th>
+                            <td> {{ dados_totais.bairro }} </td>
+                        </tr>
+                        <tr>
+                            <th scope="col">CEP</th>
+                            <td> {{ dados_totais.cep }} </td>
+                        </tr>
+                        <tr>
+                            <th scope="col">E-mails</th>
+                            <td> {{ dados_totais.emails }} </td>
+                        </tr>
+                        <tr>
+                            <th scope="col">Telefones</th>
+                            <td> {{ dados_totais.telefones }} </td>
+                        </tr>
+                    </thead>
+                </table>
 
+            {% for dado in dados_nome_ua_basica %}
+                <table class="table" id="tabela_nome_unidade">
+                    <thead>
+                        <tr>
+                            <th scope="col">Código da Unidade</th>
+                            <td>{{ dado.cd_ua }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="col">Código da Unidade Básica</th>
+                            <td> {{ dado.cd_ua_basica }} </td>
+                        </tr>
+                        <tr>
+                            <th scope="col">Nome da Unidade Básica</th>
+                            <td> {{ dado.nome_ua_basica }} </td>
+                        </tr>
+                        <tr>
+                            <th scope="col">Sigla UA</th>
+                            <td> {{ dado.sigla_ua }} </td>
+                        </tr>
+                        <tr>
+                            <th scope="col">Titular da Unidade</th>
+                            <td> {{ dado.titular }} </td>
+                        </tr>
+                        <tr>
+                            <th scope="col">Cargo</th>
+                            <td> {{ dado.cargo }} </td>
+                        </tr>
+                        <tr>
+                            <th scope="col">Endereço</th>
+                            <td> {{ dado.nome_logradouro }} </td>
+                        </tr>
+                        <tr>
+                            <th scope="col">Numero</th>
+                            <td> {{ dado.nro }} </td>
+                        </tr>
+                        <tr>
+                            <th scope="col">Bairro</th>
+                            <td> {{ dado.bairro }} </td>
+                        </tr>
+                        <tr>
+                            <th scope="col">CEP</th>
+                            <td> {{ dado.cep }} </td>
+                        </tr>
+                        <tr>
+                            <th scope="col">E-mails</th>
+                            <td> {{ dado.emails }} </td>
+                        </tr>
+                        <tr>
+                            <th scope="col">Telefones</th>
+                            <td> {{ dado.telefones }} </td>
+                        </tr>
+                    </thead>
+                </table>
+            {% endfor %}
 
-            </table>
+            {% for dado in dados_titular %}
+                <table class="table" id="tabela_titular">
+                    <thead>
+                        <tr>
+                            <th scope="col">Código da Unidade</th>
+                            <td>{{ dado.cd_ua }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="col">Código da Unidade Básica</th>
+                            <td> {{ dado.cd_ua_basica }} </td>
+                        </tr>
+                        <tr>
+                            <th scope="col">Nome da Unidade Básica</th>
+                            <td> {{ dado.nome_ua_basica }} </td>
+                        </tr>
+                        <tr>
+                            <th scope="col">Sigla UA</th>
+                            <td> {{ dado.sigla_ua }} </td>
+                        </tr>
+                        <tr>
+                            <th scope="col">Titular da Unidade</th>
+                            <td> {{ dado.titular }} </td>
+                        </tr>
+                        <tr>
+                            <th scope="col">Cargo</th>
+                            <td> {{ dado.cargo }} </td>
+                        </tr>
+                        <tr>
+                            <th scope="col">Endereço</th>
+                            <td> {{ dado.nome_logradouro }} </td>
+                        </tr>
+                        <tr>
+                            <th scope="col">Numero</th>
+                            <td> {{ dado.nro }} </td>
+                        </tr>
+                        <tr>
+                            <th scope="col">Bairro</th>
+                            <td> {{ dado.bairro }} </td>
+                        </tr>
+                        <tr>
+                            <th scope="col">CEP</th>
+                            <td> {{ dado.cep }} </td>
+                        </tr>
+                        <tr>
+                            <th scope="col">E-mails</th>
+                            <td> {{ dado.emails }} </td>
+                        </tr>
+                        <tr>
+                            <th scope="col">Telefones</th>
+                            <td> {{ dado.telefones }} </td>
+                        </tr>
+                    </thead>
+                </table>
+            {% endfor %}
         </div>
     </div>
 </div>
