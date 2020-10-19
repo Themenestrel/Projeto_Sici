@@ -10,7 +10,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="static/js/mostrarTabela.js"></script>
 
 </head>
 <body>
@@ -43,7 +42,7 @@
                         <h3>Nome do Gestor</h3>
                         <input id="gestor" type="text"  placeholder="ou Digite o Nome do Gestor" value="" name="titular">
                     </div>
-                    <button onclick="mostrarTabela()" type="submit">Pesquisar<i class="fa fa-search"></i></button>
+                    <button type="submit">Pesquisar<i class="fa fa-search"></i></button>
     </form>
 
         {% if dados_totais %}
@@ -109,7 +108,7 @@
                     <tbody>
                         {% for dado in dados_nome_ua %}
                             <tr>
-                                <td>{{ dado.cd_ua }}</td>
+                                <td><u><a href=""</a>{{ dado.cd_ua }}</u></td>
                                 <td>{{ dado.nome_ua }}</td>
                                 <td>{{ dado.titular }}</td>
                             </tr>
@@ -127,13 +126,22 @@
                     <tbody>
                         {% for dado in dados_titular %}
                             <tr>
-                                <td>{{ dado.cd_ua }}</td>
+                                <td><u><a href=""</a>{{ dado.cd_ua }}</u></td>
                                 <td>{{ dado.nome_ua }}</td>
                                 <td>{{ dado.titular }}</td>
                             </tr>
                         {% endfor %}
                     </tbody>
             </table>
+
+        {% elif dados_vazio %}
+
+            <table class="table" id="refaca_busca">
+                <thead>
+                    <th>Nenhum resultado encontrato. Por favor, tente novamente!</th>
+                </thead>
+            </table>
+
         {% endif %}
         </div>
     </div>
