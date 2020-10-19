@@ -6,20 +6,21 @@ from sici_site.models import Dados
 # Create your views here.
 
 def home(request):
-    dados_totais = Dados.objects.all()
-    dados_nome_ua_basica = Dados.objects.all()
-    dados_titular = Dados.objects.all()
 
-    busca_cd_ua = request.GET.get('cd_ua')
-    busca_nome_ua_basica = request.GET.get('nome_ua_basica')
-    busca_titular = request.GET.get('titular')
+    dados_totais = None
+    dados_nome_ua = None
+    dados_titular = None
+
+    busca_cd_ua = request.POST.get('cd_ua')
+    busca_nome_ua = request.POST.get('nome_ua')
+    busca_titular = request.POST.get('titular')
 
     if busca_cd_ua:
         dados_totais = Dados.objects.filter(cd_ua=busca_cd_ua).order_by('data_criacao_registro').last()
-    elif busca_nome_ua_basica:
-        dados_nome_ua_basica = Dados.objects.filter(nome_ua_basica__icontains=busca_nome_ua_basica).order_by(
-            'data_criacao_registro')
+    elif busca_nome_ua:
+        dados_nome_ua = Dados.objects.filter(nome_ua__contains=busca_nome_ua).order_by()
     elif busca_titular:
-        dados_titular = Dados.objects.filter(titular__icontains=busca_titular).order_by('data_criacao_registro')
+        dados_titular = Dados.objects.filter(titular__contains=busca_titular).order_by()
 
-    return render(request, 'sici_site/home.html', {'dados_totais': dados_totais})
+    return render(request, 'sici_site/home.html', {'dados_totais': dados_totais, 'dados_nome_ua': dados_nome_ua, 'dados_titular': dados_titular})
+
