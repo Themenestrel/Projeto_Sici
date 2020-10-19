@@ -24,7 +24,7 @@
         <h1>Sistema Integrado de Consulta Institucional</h1>
         <img id="icone_tcm" src="static/imagens/Logotipo_v02/logo_tcmrj_horizontal_GRADIENTE-RGB.png" width="42%"/>
     </div>
-    <form action='/' method="POST">
+    <form action='/' method="GET">
         {% csrf_token %}
         <div class="container">
             <div class="row">
@@ -43,7 +43,6 @@
                         <input id="gestor" type="text"  placeholder="ou Digite o Nome do Gestor" value="" name="titular">
                     </div>
                     <button type="submit">Pesquisar<i class="fa fa-search"></i></button>
-    </form>
 
         {% if dados_totais %}
             <table class="table" id="tabela_cd_ua">
@@ -108,7 +107,7 @@
                     <tbody>
                         {% for dado in dados_nome_ua %}
                             <tr>
-                                <td><u><a href=""</a>{{ dado.cd_ua }}</u></td>
+                                <td><u><a href="http://127.0.0.1:8000/?csrfmiddlewaretoken=yZvcRBIj9c3MiCmkYTRdIE0AdNgR22ZCn95QflYR3M8noaa2lOE8f6bYxf84emQx&cd_ua={{ dado.cd_ua }}&nome_ua=&titular="</a>{{ dado.cd_ua }}</u></td>
                                 <td>{{ dado.nome_ua }}</td>
                                 <td>{{ dado.titular }}</td>
                             </tr>
@@ -126,7 +125,7 @@
                     <tbody>
                         {% for dado in dados_titular %}
                             <tr>
-                                <td><u><a href=""</a>{{ dado.cd_ua }}</u></td>
+                                <td><u><a href="http://127.0.0.1:8000/?csrfmiddlewaretoken=yZvcRBIj9c3MiCmkYTRdIE0AdNgR22ZCn95QflYR3M8noaa2lOE8f6bYxf84emQx&cd_ua={{ dado.cd_ua }}&nome_ua=&titular="</a>{{ dado.cd_ua }}</u></td>
                                 <td>{{ dado.nome_ua }}</td>
                                 <td>{{ dado.titular }}</td>
                             </tr>
@@ -134,7 +133,7 @@
                     </tbody>
             </table>
 
-        {% elif dados_vazio %}
+        {% else %}
 
             <table class="table" id="refaca_busca">
                 <thead>
@@ -143,6 +142,9 @@
             </table>
 
         {% endif %}
+
+    </form>
+
         </div>
     </div>
 </div>
