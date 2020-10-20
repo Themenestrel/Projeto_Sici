@@ -30,7 +30,7 @@
             <div class="row">
                     <div class="col-sm-4">
                         <h3>Código da Unidade</h3>
-                        <input id="cod_ua" type="text" placeholder="Digite o Código da Unidade" value="" name="cd_ua">
+                        <input id="cod_ua" type="number" placeholder="Digite o Código da Unidade" value="" name="cd_ua">
                     </div>
 
                     <div class="col-sm-4">
@@ -49,55 +49,110 @@
                 <thead>
                     <tr>
                         <th scope="col">Código da Unidade</th>
+                        {% if dados_totais.cd_ua != 'None' %}
                         <td>{{ dados_totais.cd_ua }}</td>
+                        {% else %}
+                        <td>Código da Unidade não Cadastrado</td>
+                        {% endif %}
                     </tr>
                     <tr>
                         <th scope="col">Código da Unidade Básica</th>
+                        {% if dados_totais.cd_ua_basica != 'None' %}
                         <td> {{ dados_totais.cd_ua_basica }} </td>
+                        {% else %}
+                        <td>Código da Unidade Básica não Cadastrado</td>
+                        {% endif %}
                     </tr>
                     <tr>
                         <th scope="col">Nome da Unidade Básica</th>
+                        {% if dados_totais.nome_ua_basica != 'None' %}
                         <td> {{ dados_totais.nome_ua_basica }} </td>
+                        {% else %}
+                        <td>Nome da Unidade Básica não Cadastrado</td>
+                        {% endif %}
                     </tr>
                     <tr>
                         <th scope="col">Sigla UA</th>
+                        {% if dados_totais.sigla_ua != 'None' %}
                         <td> {{ dados_totais.sigla_ua }} </td>
+                        {% else %}
+                        <td>Sigla da Unidade não Cadastrada</td>
+                        {% endif %}
                     </tr>
                     <tr>
                         <th scope="col">Titular da Unidade</th>
+                        {% if dados_totais.titular != 'None' %}
                         <td> {{ dados_totais.titular }} </td>
+                        {% else %}
+                        <td>Titular não Cadastrado</td>
+                        {% endif %}
                     </tr>
                     <tr>
                         <th scope="col">Cargo</th>
+                        {% if dados_totais.cargo != 'None' %}
                         <td> {{ dados_totais.cargo }} </td>
+                        {% else %}
+                        <td>Cargo não Cadastrado</td>
+                        {% endif %}
                     </tr>
                     <tr>
                         <th scope="col">Endereço</th>
+                        {% if dados_totais.nome_logradouro != 'None' %}
                         <td> {{ dados_totais.nome_logradouro }} </td>
+                        {% else %}
+                        <td>Endereço não Cadastrado</td>
+                        {% endif %}
                     </tr>
                     <tr>
                         <th scope="col">Numero</th>
+                        {% if dados_totais.nro != 'None' %}
                         <td> {{ dados_totais.nro }} </td>
+                        {% else %}
+                        <td>Número não Cadastrado</td>
+                        {% endif %}
                     </tr>
                     <tr>
                         <th scope="col">Bairro</th>
+                        {% if dados_totais.bairro != 'None' %}
                         <td> {{ dados_totais.bairro }} </td>
+                        {% else %}
+                        <td>Bairro não Cadastrado</td>
+                        {% endif %}
                     </tr>
                     <tr>
                         <th scope="col">CEP</th>
+                        {% if dados_totais.cep != 'None' %}
                         <td> {{ dados_totais.cep }} </td>
+                        {% else %}
+                        <td>CEP não cadastrado</td>
+                        {% endif %}
                     </tr>
                     <tr>
                         <th scope="col">E-mails</th>
+                        {% if dados_totais.emails != 'None' %}
                         <td> {{ dados_totais.emails }} </td>
+                        {% else %}
+                        <td>E-mail não Cadastrado</td>
+                        {% endif %}
                     </tr>
                     <tr>
                         <th scope="col">Telefones</th>
+                        {% if dados_totais.telefones != 'None' %}
                         <td> {{ dados_totais.telefones }} </td>
+                        {% else %}
+                        <td>Telefone não Cadastrado</td>
+                        {% endif %}
                     </tr>
             </table>
+        {% elif dados_totais.cd_ua == 'None' %}
+            <table class="table" id="refaca_busca">
+                <thead>
+                    <th>Nenhum resultado encontrato. Por favor, tente novamente!</th>
+                </thead>
+            </table>
+        {% endif %}
 
-        {% elif dados_nome_ua %}
+        {% if dados_nome_ua %}
             <table class="table" id="tabela_nome_ua">
                 <thead>
                     <th>Código da Unidade</th>
@@ -107,15 +162,22 @@
                     <tbody>
                         {% for dado in dados_nome_ua %}
                             <tr>
-                                <td><u><a href="http://127.0.0.1:8000/?csrfmiddlewaretoken=yZvcRBIj9c3MiCmkYTRdIE0AdNgR22ZCn95QflYR3M8noaa2lOE8f6bYxf84emQx&cd_ua={{ dado.cd_ua }}&nome_ua=&titular="</a>{{ dado.cd_ua }}</u></td>
+                                <td><u><a href="/?csrfmiddlewaretoken=yZvcRBIj9c3MiCmkYTRdIE0AdNgR22ZCn95QflYR3M8noaa2lOE8f6bYxf84emQx&cd_ua={{ dado.cd_ua }}&nome_ua=&titular="</a>{{ dado.cd_ua }}</u></td>
                                 <td>{{ dado.nome_ua }}</td>
                                 <td>{{ dado.titular }}</td>
                             </tr>
                         {% endfor %}
                     </tbody>
             </table>
+        {% elif dados_nome_ua.nome_ua == 'None' %}
+            <table class="table" id="refaca_busca">
+                <thead>
+                    <th>Nenhum resultado encontrato. Por favor, tente novamente!</th>
+                </thead>
+            </table>
+        {% endif %}
 
-        {% elif dados_titular %}
+        {% if dados_titular %}
             <table class="table" id="tabela_titular">
                 <thead>
                         <th>Código da Unidade</th>
@@ -125,24 +187,20 @@
                     <tbody>
                         {% for dado in dados_titular %}
                             <tr>
-                                <td><u><a href="http://127.0.0.1:8000/?csrfmiddlewaretoken=yZvcRBIj9c3MiCmkYTRdIE0AdNgR22ZCn95QflYR3M8noaa2lOE8f6bYxf84emQx&cd_ua={{ dado.cd_ua }}&nome_ua=&titular="</a>{{ dado.cd_ua }}</u></td>
+                                <td><u><a href="/?csrfmiddlewaretoken=yZvcRBIj9c3MiCmkYTRdIE0AdNgR22ZCn95QflYR3M8noaa2lOE8f6bYxf84emQx&cd_ua={{ dado.cd_ua }}&nome_ua=&titular="</a>{{ dado.cd_ua }}</u></td>
                                 <td>{{ dado.nome_ua }}</td>
                                 <td>{{ dado.titular }}</td>
                             </tr>
                         {% endfor %}
                     </tbody>
             </table>
-
-        {% else %}
-
+        {% elif dados_titular.titular == 'None' %}
             <table class="table" id="refaca_busca">
                 <thead>
                     <th>Nenhum resultado encontrato. Por favor, tente novamente!</th>
                 </thead>
             </table>
-
         {% endif %}
-
     </form>
 
         </div>
