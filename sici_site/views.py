@@ -10,13 +10,10 @@ def home(request):
     busca = request.GET.get("busca")
     dados = None
 
-    print(tipo_consulta, busca)
     if tipo_consulta == "cd_ua":
-        print(busca)
         dados = Dados.objects.filter(cd_ua=int(busca)).order_by('data_criacao_registro').last()
     elif tipo_consulta == "nome":
         dados = Dados.objects.filter(nome_ua__contains=busca).order_by('cd_ua')
     elif tipo_consulta == "titular":
         dados = Dados.objects.filter(titular__contains=busca).order_by('cd_ua')
-    print(dados)
     return render(request, 'sici_site/home.html', {'dados': dados, 'tipo':tipo_consulta})
