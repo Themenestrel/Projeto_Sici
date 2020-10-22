@@ -13,16 +13,16 @@
 
 </head>
 <body>
-<div id="interface">
+<div class="container" id="interface">
     <div class="jumbotron text-center">
         <div class="topnav">
-            <a class="active" href="#home">Home</a>
-            <a href="#about">Sobre</a>
-            <a href="#contact">Contato</a>
+            <a class="active" href="/">Home</a>
+            <a href="#">Sobre</a>
+            <a href="#">Contato</a>
         </div>
         <br>
         <h1>Sistema Integrado de Consulta Institucional</h1>
-        <img id="icone_tcm" src="static/imagens/Logotipo_v02/logo_tcmrj_horizontal_GRADIENTE-RGB.png" width="42%"/>
+        <img id="icone_tcm" src="static/imagens/Logotipo_v02/logo_tcmrj_horizontal_GRADIENTE-RGB.png" width="42%" alt="logotipo"/>
     </div>
     <div class="container">
         <div class="row">
@@ -30,10 +30,9 @@
 
             <div class="col-sm-4">
                 <form action='/' method="GET">
-                    {% csrf_token %}
                     <label for="tipo_consulta">Selecione o tipo de consulta</label>
                     <select id="tipo_consulta" name="consulta" onchange="inputTipo(this.value)">
-                        <option value="cod_ua" selected>Código da Unidade</option>
+                        <option value="cd_ua" selected>Código da Unidade</option>
                         <option value="nome" selected>Nome da Unidade</option>
                         <option value="gestor">Nome do Gestor</option>
                     </select>
@@ -42,166 +41,115 @@
                     <button type="submit">Pesquisar<i class="fa fa-search"></i></button>
                 </form>
             </div>
+        </div>
 
-        {% if dados_totais %}
-            <table class="table" id="tabela_cd_ua">
-                <thead>
-                    <tr>
-                        <th scope="col">Código da Unidade</th>
-                        {% if dados_totais.cd_ua != 'None' %}
-                        <td>{{ dados_totais.cd_ua }}</td>
-                        {% else %}
-                        <td>Código da Unidade não Cadastrado</td>
-                        {% endif %}
-                    </tr>
-                    <tr>
-                        <th scope="col">Código da Unidade Básica</th>
-                        {% if dados_totais.cd_ua_basica != 'None' %}
-                        <td> {{ dados_totais.cd_ua_basica }} </td>
-                        {% else %}
-                        <td>Código da Unidade Básica não Cadastrado</td>
-                        {% endif %}
-                    </tr>
-                    <tr>
-                        <th scope="col">Nome da Unidade Básica</th>
-                        {% if dados_totais.nome_ua_basica != 'None' %}
-                        <td> {{ dados_totais.nome_ua_basica }} </td>
-                        {% else %}
-                        <td>Nome da Unidade Básica não Cadastrado</td>
-                        {% endif %}
-                    </tr>
-                    <tr>
-                        <th scope="col">Sigla UA</th>
-                        {% if dados_totais.sigla_ua != 'None' %}
-                        <td> {{ dados_totais.sigla_ua }} </td>
-                        {% else %}
-                        <td>Sigla da Unidade não Cadastrada</td>
-                        {% endif %}
-                    </tr>
-                    <tr>
-                        <th scope="col">Titular da Unidade</th>
-                        {% if dados_totais.titular != 'None' %}
-                        <td> {{ dados_totais.titular }} </td>
-                        {% else %}
-                        <td>Titular não Cadastrado</td>
-                        {% endif %}
-                    </tr>
-                    <tr>
-                        <th scope="col">Cargo</th>
-                        {% if dados_totais.cargo != 'None' %}
-                        <td> {{ dados_totais.cargo }} </td>
-                        {% else %}
-                        <td>Cargo não Cadastrado</td>
-                        {% endif %}
-                    </tr>
-                    <tr>
-                        <th scope="col">Endereço</th>
-                        {% if dados_totais.nome_logradouro != 'None' %}
-                        <td> {{ dados_totais.nome_logradouro }} </td>
-                        {% else %}
-                        <td>Endereço não Cadastrado</td>
-                        {% endif %}
-                    </tr>
-                    <tr>
-                        <th scope="col">Numero</th>
-                        {% if dados_totais.nro != 'None' %}
-                        <td> {{ dados_totais.nro }} </td>
-                        {% else %}
-                        <td>Número não Cadastrado</td>
-                        {% endif %}
-                    </tr>
-                    <tr>
-                        <th scope="col">Bairro</th>
-                        {% if dados_totais.bairro != 'None' %}
-                        <td> {{ dados_totais.bairro }} </td>
-                        {% else %}
-                        <td>Bairro não Cadastrado</td>
-                        {% endif %}
-                    </tr>
-                    <tr>
-                        <th scope="col">CEP</th>
-                        {% if dados_totais.cep != 'None' %}
-                        <td> {{ dados_totais.cep }} </td>
-                        {% else %}
-                        <td>CEP não cadastrado</td>
-                        {% endif %}
-                    </tr>
-                    <tr>
-                        <th scope="col">E-mails</th>
-                        {% if dados_totais.emails != 'None' %}
-                        <td> {{ dados_totais.emails }} </td>
-                        {% else %}
-                        <td>E-mail não Cadastrado</td>
-                        {% endif %}
-                    </tr>
-                    <tr>
-                        <th scope="col">Telefones</th>
-                        {% if dados_totais.telefones != 'None' %}
-                        <td> {{ dados_totais.telefones }} </td>
-                        {% else %}
-                        <td>Telefone não Cadastrado</td>
-                        {% endif %}
-                    </tr>
-            </table>
-        {% elif dados_totais.cd_ua == 'None' %}
-            <table class="table" id="refaca_busca">
-                <thead>
-                    <th>Nenhum resultado encontrato. Por favor, tente novamente!</th>
-                </thead>
-            </table>
-        {% endif %}
-
-        {% if dados_nome_ua %}
-            <table class="table" id="tabela_nome_ua">
-                <thead>
-                    <th>Código da Unidade</th>
-                    <th>Nome da Unidade</th>
-                    <th>Titular</th>
-                </thead>
-                    <tbody>
-                        {% for dado in dados_nome_ua %}
+        <div class="row">
+            {% if dados %}
+                {% if tipo == "cd_ua" %}
+                    <table class="table" id="tabela_cd_ua">
+                        <thead>
                             <tr>
-                                <td><u><a href="/?csrfmiddlewaretoken=yZvcRBIj9c3MiCmkYTRdIE0AdNgR22ZCn95QflYR3M8noaa2lOE8f6bYxf84emQx&cd_ua={{ dado.cd_ua }}&nome_ua=&titular="</a>{{ dado.cd_ua }}</u></td>
-                                <td>{{ dado.nome_ua }}</td>
-                                <td>{{ dado.titular }}</td>
+                                <th scope="col">Código da Unidade</th>
+                                <td>
+                                    {{ dados.cd_ua | default_if_none:"Código da Unidade não Cadastrado"}}
+                                </td>
                             </tr>
-                        {% endfor %}
-                    </tbody>
-            </table>
-        {% elif dados_nome_ua.nome_ua == 'None' %}
-            <table class="table" id="refaca_busca">
-                <thead>
-                    <th>Nenhum resultado encontrato. Por favor, tente novamente!</th>
-                </thead>
-            </table>
-        {% endif %}
-
-        {% if dados_titular %}
-            <table class="table" id="tabela_titular">
-                <thead>
-                        <th>Código da Unidade</th>
-                        <th>Nome da Unidade</th>
-                        <th>Titular</th>
-                </thead>
-                    <tbody>
-                        {% for dado in dados_titular %}
                             <tr>
-                                <td><u><a href="/?csrfmiddlewaretoken=yZvcRBIj9c3MiCmkYTRdIE0AdNgR22ZCn95QflYR3M8noaa2lOE8f6bYxf84emQx&cd_ua={{ dado.cd_ua }}&nome_ua=&titular="</a>{{ dado.cd_ua }}</u></td>
-                                <td>{{ dado.nome_ua }}</td>
-                                <td>{{ dado.titular }}</td>
+                                <th scope="col">Código da Unidade Básica</th>
+                                    <td>
+                                        {{ dados.cd_ua_basica | default_if_none:"Código da Unidade Básica não Cadastrado" }}
+                                    </td>
                             </tr>
-                        {% endfor %}
-                    </tbody>
-            </table>
-        {% elif dados_titular.titular == 'None' %}
-            <table class="table" id="refaca_busca">
-                <thead>
-                    <th>Nenhum resultado encontrato. Por favor, tente novamente!</th>
-                </thead>
-            </table>
-        {% endif %}
-    </form>
-
+                            <tr>
+                                <th scope="col">Nome da Unidade Básica</th>
+                                <td>
+                                    {{ dados.nome_ua_basica | default_if_none:"Nome da Unidade Básica não Cadastrado" }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="col">Sigla UA</th>
+                                <td>
+                                    {{ dados.sigla_ua | default_if_none:"Sigla da Unidade não Cadastrada" }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="col">Titular da Unidade</th>
+                                <td>
+                                    {{ dados.titular | default_if_none:"Titular não Cadastrado" }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="col">Cargo</th>
+                                <td>
+                                    {{ dados.cargo | default_if_none:"Cargo não Cadastrado" }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="col">Endereço</th>
+                                    <td>
+                                        {{ dados.nome_logradouro | default_if_none:"Endereço não Cadastrado"}}
+                                    </td>
+                            </tr>
+                            <tr>
+                                <th scope="col">Numero</th>
+                                    <td>
+                                        {{ dados.nro | default_if_none:"Número não Cadastrado" }}
+                                    </td>
+                            </tr>
+                            <tr>
+                                <th scope="col">Bairro</th>
+                                <td>
+                                    {{ dados.bairro | default_if_none:"Bairro não Cadastrado" }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="col">CEP</th>
+                                <td>
+                                    {{ dados.cep | default_if_none:"CEP não cadastrado" }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="col">E-mails</th>
+                                <td>
+                                    {{ dados.emails | default_if_none:"E-mail não Cadastrado" }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="col">Telefones</th>
+                                <td>
+                                    {{ dados.telefones | default_if_none:"Telefone não Cadastrado" }}
+                                </td>
+                            </tr>
+                    </table>
+                {% else %}
+                     <table class="table" id="tabela_nome_ua">
+                        <thead>
+                            <tr>
+                                <th>Código da Unidade</th>
+                                <th>Nome da Unidade</th>
+                                <th>Titular</th>
+                            </tr>
+                        </thead>
+                            <tbody>
+                                {% for dado in dados %}
+                                    <tr>
+                                        <td><u><a href="?consulta=cd_ua&busca={{ dado.cd_ua }}">{{ dado.cd_ua }}</a></u></td>
+                                        <td>{{ dado.nome_ua }}</td>
+                                        <td>{{ dado.titular }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                    </table>
+                {% endif %}
+            {% else %}
+                <table class="table" id="refaca_busca">
+                    <thead>
+                        <tr>
+                        <th>Nenhum resultado encontrato. Por favor, tente novamente!</th>
+                        </tr>
+                    </thead>
+                </table>
+            {% endif %}
         </div>
     </div>
 </div>
@@ -209,7 +157,7 @@
 <footer id="rodape">
     <p>Copyright &copy; 2020 - by Matheus Scanavachi<br>
         <a href="https://www.facebook.com/scanavacchi" target="_blank">Facebook</a>
-        <a href="https://www.instagram.com/matheusscanavachi/" target="_blank">Instagram<a/>
+        <a href="https://www.instagram.com/matheusscanavachi/" target="_blank">Instagram</a>
     </p>
 </footer>
 <script src="static\js\input.js"></script>
