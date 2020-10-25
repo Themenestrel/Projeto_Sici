@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 
 <html lang="pt-br">
+{% load if_str_None %}
 <head>
     <title>SICONI</title>
     <meta charset="utf-8">
@@ -31,13 +32,14 @@
             <div class="col-sm-4">
                 <form action='/' method="GET">
                     <label for="tipo_consulta">Selecione o tipo de consulta</label>
-                    <select id="tipo_consulta" name="consulta" onchange="inputTipo(this.value)">
-                        <option value="cd_ua" selected>Código da Unidade</option>
-                        <option value="nome" selected>Nome da Unidade</option>
+                    <select id="tipo_consulta" name="consulta" onchange="inputTipo(this.value)" required>
+                        <option disabled selected>-----------</option>
+                        <option value="cd_ua">Código da Unidade</option>
+                        <option value="nome">Nome da Unidade</option>
                         <option value="gestor">Nome do Gestor</option>
                     </select>
 
-                    <input id="busca" type="text" placeholder="Digite o Código da Unidade" value="" name="busca" required><br>
+                    <input id="busca" type="text" placeholder="Digite o Código da Unidade" value="" name="busca" required hidden><br>
                     <button type="submit">Pesquisar<i class="fa fa-search"></i></button>
                 </form>
             </div>
@@ -51,73 +53,73 @@
                             <tr>
                                 <th scope="col">Código da Unidade</th>
                                 <td>
-                                    {{ dados.cd_ua | default_if_none:"Código da Unidade não Cadastrado"}}
+                                    {{ dados.cd_ua | if_str_None:"Código da Unidade não Cadastrado"}}
                                 </td>
                             </tr>
                             <tr>
                                 <th scope="col">Código da Unidade Básica</th>
                                     <td>
-                                        {{ dados.cd_ua_basica | default_if_none:"Código da Unidade Básica não Cadastrado" }}
+                                        {{ dados.cd_ua_basica | if_str_None:"Código da Unidade Básica não Cadastrado" }}
                                     </td>
                             </tr>
                             <tr>
                                 <th scope="col">Nome da Unidade Básica</th>
                                 <td>
-                                    {{ dados.nome_ua_basica | default_if_none:"Nome da Unidade Básica não Cadastrado" }}
+                                    {{ dados.nome_ua_basica | if_str_None:"Nome da Unidade Básica não Cadastrado" }}
                                 </td>
                             </tr>
                             <tr>
                                 <th scope="col">Sigla UA</th>
                                 <td>
-                                    {{ dados.sigla_ua | default_if_none:"Sigla da Unidade não Cadastrada" }}
+                                    {{ dados.sigla_ua | if_str_None:"Sigla da Unidade não Cadastrada" }}
                                 </td>
                             </tr>
                             <tr>
                                 <th scope="col">Titular da Unidade</th>
                                 <td>
-                                    {{ dados.titular | default_if_none:"Titular não Cadastrado" }}
+                                    {{ dados.titular | if_str_None:"Titular não Cadastrado" }}
                                 </td>
                             </tr>
                             <tr>
                                 <th scope="col">Cargo</th>
                                 <td>
-                                    {{ dados.cargo | default_if_none:"Cargo não Cadastrado" }}
+                                    {{ dados.cargo | if_str_None:"Cargo não Cadastrado" }}
                                 </td>
                             </tr>
                             <tr>
                                 <th scope="col">Endereço</th>
                                     <td>
-                                        {{ dados.nome_logradouro | default_if_none:"Endereço não Cadastrado"}}
+                                        {{ dados.nome_logradouro | if_str_None:"Endereço não Cadastrado"}}
                                     </td>
                             </tr>
                             <tr>
                                 <th scope="col">Numero</th>
                                     <td>
-                                        {{ dados.nro | default_if_none:"Número não Cadastrado" }}
+                                        {{ dados.nro | if_str_None:"Número não Cadastrado" }}
                                     </td>
                             </tr>
                             <tr>
                                 <th scope="col">Bairro</th>
                                 <td>
-                                    {{ dados.bairro | default_if_none:"Bairro não Cadastrado" }}
+                                    {{ dados.bairro | if_str_None:"Bairro não Cadastrado" }}
                                 </td>
                             </tr>
                             <tr>
                                 <th scope="col">CEP</th>
                                 <td>
-                                    {{ dados.cep | default_if_none:"CEP não cadastrado" }}
+                                    {{ dados.cep | if_str_None:"CEP não cadastrado" }}
                                 </td>
                             </tr>
                             <tr>
                                 <th scope="col">E-mails</th>
                                 <td>
-                                    {{ dados.emails | default_if_none:"E-mail não Cadastrado" }}
+                                    {{ dados.emails | if_str_None:"E-mail não Cadastrado" }}
                                 </td>
                             </tr>
                             <tr>
                                 <th scope="col">Telefones</th>
                                 <td>
-                                    {{ dados.telefones | default_if_none:"Telefone não Cadastrado" }}
+                                    {{ dados.telefones | if_str_None:"Telefone não Cadastrado" }}
                                 </td>
                             </tr>
                     </table>
@@ -135,20 +137,22 @@
                                     <tr>
                                         <td><u><a href="?consulta=cd_ua&busca={{ dado.cd_ua }}">{{ dado.cd_ua }}</a></u></td>
                                         <td>{{ dado.nome_ua }}</td>
-                                        <td>{{ dado.titular }}</td>
+                                        <td>{{ dado.titular | if_str_None:'Titular não cadastrado' }}</td>
                                     </tr>
                                 {% endfor %}
                             </tbody>
                     </table>
                 {% endif %}
             {% else %}
-                <table class="table" id="refaca_busca">
-                    <thead>
-                        <tr>
-                        <th>Nenhum resultado encontrato. Por favor, tente novamente!</th>
-                        </tr>
-                    </thead>
-                </table>
+                {%  if tipo != None %}
+                    <table class="table" id="refaca_busca">
+                        <thead>
+                            <tr>
+                            <th>Nenhum resultado encontrato. Por favor, tente novamente!</th>
+                            </tr>
+                        </thead>
+                    </table>
+                {% endif %}
             {% endif %}
         </div>
     </div>

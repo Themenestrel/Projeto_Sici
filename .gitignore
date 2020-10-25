@@ -1,9 +1,12 @@
+__pycache__/
 .idea
 db.sqlite3
-sici/__pycache__/*
+SICI.db
+teste.db
+sici/__pycache__/
 sici/asgi.py
 sici/settings.py
 sici/wsgi.py
-sici_site/migrations/*
-sici_site/__pycache__/*
+sici_site/migrations/
+sici_site/__pycache__/
 sici_site/models.py
