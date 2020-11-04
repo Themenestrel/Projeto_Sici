@@ -1,39 +1,40 @@
-# This is an auto-generated Django model module.
-# You'll have to do the following manually to clean this up:
-#   * Rearrange models' order
-#   * Make sure each model has one field with primary_key=True
-#   * Make sure each ForeignKey and OneToOneField has `on_delete` set to the desired behavior
-#   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
-# Feel free to rename the models, but don't rename db_table values or field names.
-from django.db import models
+from django.db.models import Model
+from django.db.models import PositiveIntegerField
+from django.db.models import CharField
+from django.db.models import EmailField
+from django.db.models import DateTimeField
+from django.db.models import TextField
 
 
-class Dados(models.Model):
-    cd_ua = models.IntegerField(blank=True, null=True)
-    sigla_ua = models.TextField(blank=True, null=True)  # This field type is a guess.
-    nome_ua = models.TextField(blank=True, null=True)  # This field type is a guess.
-    titular = models.TextField(blank=True, null=True)  # This field type is a guess.
-    cargo = models.TextField(blank=True, null=True)  # This field type is a guess.
-    cd_ua_pai = models.TextField(blank=True, null=True)  # This field type is a guess.
-    cd_ua_basica = models.TextField(blank=True, null=True)  # This field type is a guess.
-    nome_ua_basica = models.TextField(blank=True, null=True)  # This field type is a guess.
-    sigla_ua_basica = models.TextField(blank=True, null=True)  # This field type is a guess.
-    nat_juridica = models.TextField(blank=True, null=True)  # This field type is a guess.
-    ordem_ua_basica = models.TextField(blank=True, null=True)  # This field type is a guess.
-    ordem_absoluta = models.TextField(blank=True, null=True)  # This field type is a guess.
-    ordem_relativa = models.TextField(blank=True, null=True)  # This field type is a guess.
-    tipo_logradouro = models.TextField(blank=True, null=True)  # This field type is a guess.
-    nome_logradouro = models.TextField(blank=True, null=True)  # This field type is a guess.
-    trechamento_cep = models.TextField(db_column='trechamento_CEP', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
-    nome_logradouro_abreviado = models.TextField(blank=True, null=True)  # This field type is a guess.
-    nro = models.TextField(blank=True, null=True)  # This field type is a guess.
-    complemento = models.TextField(blank=True, null=True)  # This field type is a guess.
-    bairro = models.TextField(blank=True, null=True)  # This field type is a guess.
-    bairro_abreviado = models.TextField(blank=True, null=True)  # This field type is a guess.
-    localidade = models.TextField(blank=True, null=True)  # This field type is a guess.
-    cep = models.TextField(db_column='CEP', blank=True, null=True)  # Field name made lowercase. This field type is a guess.
-    telefones = models.TextField(blank=True, null=True)  # This field type is a guess.
-    emails = models.TextField(blank=True, null=True)  # This field type is a guess.
-    horario_funcionamento = models.TextField(blank=True, null=True)  # This field type is a guess.
-    msg = models.TextField(blank=True, null=True)  # This field type is a guess.
-    data_criacao_registro = models.DateTimeField(blank=True, null=True)
+class Dados(Model):
+    cd_ua = PositiveIntegerField(blank=True, null=True)
+    sigla_ua = CharField(max_length=100, blank=True, null=True)
+    nome_ua = CharField(max_length=255, blank=True, null=True)
+    titular = CharField(max_length=255, blank=True, null=True)
+    cargo = CharField(max_length=255, blank=True, null=True)
+    cd_ua_pai = PositiveIntegerField(blank=True, null=True)  
+    cd_ua_basica = PositiveIntegerField(blank=True, null=True)  
+    nome_ua_basica = CharField(max_length=255, blank=True, null=True)
+    sigla_ua_basica = CharField(max_length=255, blank=True, null=True)
+    nat_juridica = PositiveIntegerField(blank=True, null=True)
+    ordem_ua_basica = PositiveIntegerField(blank=True, null=True)
+    ordem_absoluta = PositiveIntegerField(blank=True, null=True)
+    ordem_relativa = PositiveIntegerField(blank=True, null=True)
+    tipo_logradouro = CharField(max_length=255, blank=True, null=True)
+    nome_logradouro = CharField(max_length=500, blank=True, null=True)
+    trechamento_cep = CharField(db_column='trechamento_CEP', max_length=500, blank=True, null=True)
+    nome_logradouro_abreviado = CharField(max_length=500, blank=True, null=True)
+    nro = PositiveIntegerField(blank=True, null=True)
+    complemento = CharField(max_length=255, blank=True, null=True)
+    bairro = CharField(max_length=255, blank=True, null=True)
+    bairro_abreviado = CharField(max_length=255, blank=True, null=True)
+    localidade = CharField(max_length=255, blank=True, null=True)
+    cep = CharField(max_length=255, db_column='CEP', blank=True, null=True)
+    telefones = CharField(max_length=1000, blank=True, null=True)
+    emails = EmailField(max_length=1000, blank=True, null=True)
+    horario_funcionamento = CharField(max_length=255, blank=True, null=True)
+    msg = TextField(max_length=255, blank=True, null=True)
+    data_criacao_registro = DateTimeField(blank=True, null=True)
+
+    class Meta:
+        db_table = 'Dados'
