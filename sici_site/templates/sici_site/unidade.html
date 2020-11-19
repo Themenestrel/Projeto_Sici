@@ -4,16 +4,19 @@
 
 {% block conteudo %}
     <div class="container">
-        <div class="row justify-content-md-center">
+        <div class="row justify-content-md-center mb-5">
             <div class="col-sm-4">
-                <a href="/"><h3 id="link_nova_consulta">Nova Consulta</h3></a>
+                <h3 id="link_nova_consulta"><a href="/">Nova Consulta</a></h3>
             </div>
         </div>
-        <div class="input-group">
+        <div class="row mb-3">
             <form method="get">
-                <label for="data">Pesquisar por data:</label>
-                <input id="data" name="data" type="date" class="form-control" required>
-                <button class="btn btn-outline-primary">Pesquisar</button>
+                <div class="input-group">
+                    <span class="input-group-text">Pesquisar por data:</span>
+                    <input id="data" name="data" type="date" class="form-control" required>
+
+                    <button>Pesquisar</button>
+                </div>
             </form>
         </div>
         <div class="row2">
