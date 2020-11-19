@@ -1,169 +1,69 @@
-<!DOCTYPE html>
+{% extends 'sici_site/base.html' %}
 
-<html lang="pt-br">
 {% load if_str_None %}
-<head>
-    <title>SICONI</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="static/css/style.css"/>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-</head>
-<body>
-<div class="container" id="interface">
-    <div class="jumbotron text-center">
-        <div class="topnav">
-            <a class="active" href="/">Home</a>
-            <a href="#">Sobre</a>
-            <a href="#">Contato</a>
-        </div>
-        <br>
-        <h1>Sistema Integrado de Consulta Institucional</h1>
-        <img id="icone_tcm" src="static/imagens/Logotipo_v02/logo_tcmrj_horizontal_GRADIENTE-RGB.png" width="42%" alt="logotipo"/>
-    </div>
+{% block conteudo %}
     <div class="container">
-        <div class="row">
-            <div class="col-sm-4"></div>
-
+        <div class="row justify-content-md-center">
             <div class="col-sm-4">
-                <form action='/' method="GET">
-                    <label for="tipo_consulta">Selecione o tipo de consulta</label>
-                    <select id="tipo_consulta" name="consulta" onchange="inputTipo(this.value)" required>
-                        <option disabled selected>-----------</option>
-                        <option value="cd_ua">Código da Unidade</option>
-                        <option value="nome">Nome da Unidade</option>
-                        <option value="gestor">Nome do Gestor</option>
-                    </select>
+                {% if tipo == None %}
+                    <form action='/' method="GET">
+                        <label id="texto" for="tipo_consulta">Selecione o Tipo de Consulta</label>
+                        <select class="select-css" id="tipo_consulta" name="consulta" onchange="inputTipo(this.value)">
+                            <option disabled selected>--------------------</option>
+                            <option value="cd_ua">Código da Unidade</option>
+                            <option value="nome">Nome da Unidade</option>
+                            <option value="titular">Nome do Gestor</option>
+                        </select>
 
-                    <input id="busca" type="text" placeholder="Digite o Código da Unidade" value="" name="busca" required hidden><br>
-                    <button type="submit">Pesquisar<i class="fa fa-search"></i></button>
-                </form>
+                        <input id="busca" type="text" placeholder="Digite o Código da Unidade" value="" name="busca"
+                               required hidden><br>
+                        <button id="pesquisar" type="submit" onclick="escondeBotao()">Pesquisar<i
+                                class="fa fa-search"></i>
+                        </button>
+                    </form>
+                {% else %}
+                    <label><a href="/">Nova Consulta</a></label>
+                {% endif %}
             </div>
+
         </div>
 
-        <div class="row">
+        <div class="row2">
             {% if dados %}
-                {% if tipo == "cd_ua" %}
-                    <table class="table" id="tabela_cd_ua">
-                        <thead>
-                            <tr>
-                                <th scope="col">Código da Unidade</th>
-                                <td>
-                                    {{ dados.cd_ua | if_str_None:"Código da Unidade não Cadastrado"}}
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="col">Código da Unidade Básica</th>
-                                    <td>
-                                        {{ dados.cd_ua_basica | if_str_None:"Código da Unidade Básica não Cadastrado" }}
-                                    </td>
-                            </tr>
-                            <tr>
-                                <th scope="col">Nome da Unidade Básica</th>
-                                <td>
-                                    {{ dados.nome_ua_basica | if_str_None:"Nome da Unidade Básica não Cadastrado" }}
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="col">Sigla UA</th>
-                                <td>
-                                    {{ dados.sigla_ua | if_str_None:"Sigla da Unidade não Cadastrada" }}
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="col">Titular da Unidade</th>
-                                <td>
-                                    {{ dados.titular | if_str_None:"Titular não Cadastrado" }}
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="col">Cargo</th>
-                                <td>
-                                    {{ dados.cargo | if_str_None:"Cargo não Cadastrado" }}
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="col">Endereço</th>
-                                    <td>
-                                        {{ dados.nome_logradouro | if_str_None:"Endereço não Cadastrado"}}
-                                    </td>
-                            </tr>
-                            <tr>
-                                <th scope="col">Numero</th>
-                                    <td>
-                                        {{ dados.nro | if_str_None:"Número não Cadastrado" }}
-                                    </td>
-                            </tr>
-                            <tr>
-                                <th scope="col">Bairro</th>
-                                <td>
-                                    {{ dados.bairro | if_str_None:"Bairro não Cadastrado" }}
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="col">CEP</th>
-                                <td>
-                                    {{ dados.cep | if_str_None:"CEP não cadastrado" }}
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="col">E-mails</th>
-                                <td>
-                                    {{ dados.emails | if_str_None:"E-mail não Cadastrado" }}
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="col">Telefones</th>
-                                <td>
-                                    {{ dados.telefones | if_str_None:"Telefone não Cadastrado" }}
-                                </td>
-                            </tr>
-                    </table>
-                {% else %}
-                     <table class="table" id="tabela_nome_ua">
-                        <thead>
-                            <tr>
-                                <th>Código da Unidade</th>
-                                <th>Nome da Unidade</th>
-                                <th>Titular</th>
-                            </tr>
-                        </thead>
-                            <tbody>
-                                {% for dado in dados %}
-                                    <tr>
-                                        <td><u><a href="?consulta=cd_ua&busca={{ dado.cd_ua }}">{{ dado.cd_ua }}</a></u></td>
-                                        <td>{{ dado.nome_ua }}</td>
-                                        <td>{{ dado.titular | if_str_None:'Titular não cadastrado' }}</td>
-                                    </tr>
-                                {% endfor %}
-                            </tbody>
-                    </table>
-                {% endif %}
+                <table class="table" id="tabela_nome_ua">
+                    <thead>
+                    <tr>
+                        <th>Código da Unidade</th>
+                        <th>Nome da Unidade</th>
+                        <th>Titular</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for dado in dados %}
+                        <tr>
+                            <td><u><a href="unidade/{{ dado.cd_ua }}">{{ dado.cd_ua }}</a></u></td>
+                            <td>{{ dado.nome_ua }}</td>
+                            <td>{{ dado.titular | if_str_None:'Titular não cadastrado' }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
             {% else %}
-                {%  if tipo != None %}
+                {% if tipo != None %}
                     <table class="table" id="refaca_busca">
                         <thead>
-                            <tr>
+                        <tr>
                             <th>Nenhum resultado encontrato. Por favor, tente novamente!</th>
-                            </tr>
+                        </tr>
                         </thead>
                     </table>
                 {% endif %}
             {% endif %}
         </div>
     </div>
-</div>
+{% endblock %}
 
-<footer id="rodape">
-    <p>Copyright &copy; 2020 - by Matheus Scanavachi<br>
-        <a href="https://www.facebook.com/scanavacchi" target="_blank">Facebook</a>
-        <a href="https://www.instagram.com/matheusscanavachi/" target="_blank">Instagram</a>
-    </p>
-</footer>
-<script src="static\js\input.js"></script>
-</body>
-</html>
+{% block scripts %}
+    <script src="static\js\input.js"></script>
+{% endblock %}
