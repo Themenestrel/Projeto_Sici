@@ -1,4 +1,3 @@
-
 function escondeBotao() {
 
         document.getElementById("formulario").style.display = 'none';
