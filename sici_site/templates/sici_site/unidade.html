@@ -5,20 +5,14 @@
 {% block conteudo %}
     <div class="container">
 
-        <div class="row justify-content-md-center mb-5">
-            <div class="col-sm-4">
-                <h3 id="link_nova_consulta"><a href="/">Nova Consulta</a></h3>
-            </div>
-        </div>
-        <div class="row mb-3">
+        <h3 id="link_nova_consulta"><a href="/">Nova Consulta</a></h3>
             <form method="get">
                 <div class="input-group">
                     <span class="input-group-text">Pesquisar por data:</span>
                     <input id="data" name="data" type="date" class="form-control" required>
+                    <button id="pesquisa_unidade">Pesquisar</button>
                 </div>
             </form>
-        </div>
-        <button id="pesquisa_unidade">Pesquisar</button>
 
         <div class="row2">
             <table class="table" id="tabela_cd_ua">
@@ -30,21 +24,33 @@
                     </td>
                 </tr>
                 <tr>
-                    <th scope="col">Código da Unidade Básica</th>
+                    <th scope="col">Nome da Unidade</th>
                     <td>
-                        {{ dados.cd_ua_basica | if_str_None:"Código da Unidade Básica não Cadastrado" }}
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="col">Nome da Unidade Básica</th>
-                    <td>
-                        {{ dados.nome_ua_basica | if_str_None:"Nome da Unidade Básica não Cadastrado" }}
+                        {{ dados.nome_ua | if_str_None:"Nome da Unidade não Cadastrado" }}
                     </td>
                 </tr>
                 <tr>
                     <th scope="col">Sigla UA</th>
                     <td>
                         {{ dados.sigla_ua | if_str_None:"Sigla da Unidade não Cadastrada" }}
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="col">Código da Unidade de Vinculação</th>
+                    <td>
+                        {{ dados.cd_ua_basica | if_str_None:"Código da Unidade de Vinculação não Cadastrado" }}
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="col">Nome da Unidade de Vinculação</th>
+                    <td>
+                        {{ dados.nome_ua_basica | if_str_None:"Nome da Unidade de Vinculação não Cadastrado" }}
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="col">Sigla UA de Vinculação</th>
+                    <td>
+                        {{ dados.sigla_ua_basica | if_str_None:"Sigla da Unidade de Vinculação não Cadastrada" }}
                     </td>
                 </tr>
                 <tr>
@@ -66,7 +72,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <th scope="col">Numero</th>
+                    <th scope="col">Número</th>
                     <td>
                         {{ dados.nro | if_str_None:"Número não Cadastrado" }}
                     </td>
@@ -93,6 +99,12 @@
                     <th scope="col">Telefones</th>
                     <td>
                         {{ dados.telefones | if_str_None:"Telefone não Cadastrado" }}
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="col">Data da Última Alteração</th>
+                    <td>
+                        {{ dados.data_criacao_registro | if_str_None:"Sem informações de alteração" }}
                     </td>
                 </tr>
             </table>
