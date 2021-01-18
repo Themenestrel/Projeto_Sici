@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta
 
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.utils.timezone import make_aware
 
 from sici_site.models import Dados
@@ -10,12 +10,12 @@ def home(request):
     if request.method == 'GET':
         tipo_consulta = request.GET.get("consulta", None)
         busca = request.GET.get("busca")
-        dados = None
+        
 
         if tipo_consulta == "cd_ua":
-            dados = Dados.objects.filter(cd_ua=busca).order_by('-data_criacao_registro').values('cd_ua',
-                                                                                                'nome_ua',
-                                                                                                'titular')
+            dados = Dados.objects.filter(cd_ua=busca)
+            if dados is not None:
+                return redirect(f'unidade/{busca}')     
         elif tipo_consulta == "nome":
             dados = Dados.objects.filter(nome_ua__icontains=busca).order_by('nome_ua').values('cd_ua',
                                                                                               'nome_ua',
@@ -24,6 +24,9 @@ def home(request):
             dados = Dados.objects.filter(titular__icontains=busca).order_by('titular').values('cd_ua',
                                                                                               'nome_ua',
                                                                                               'titular')
+        else:
+            dados = None
+
 
         return render(request, 'sici_site/home.html', {'dados': dados, 'tipo': tipo_consulta})
 
@@ -40,4 +43,8 @@ def unidade(request, **kwargs):
 
         busca = kwargs['cod_ua']
         dados = Dados.objects.filter(cd_ua=busca, data_criacao_registro__lt=data_busca).order_by('data_criacao_registro').last()
-        return render(request, 'sici_site/unidade.html', {'dados': dados})
+        fim = Dados.objects.filter(cd_ua=busca, data_criacao_registro__gte=data_busca).order_by('data_criacao_registro').first()
+        if fim is not None:
+            fim = fim.data_criacao_registro
+       
+        return render(request, 'sici_site/unidade.html', {'dados': dados, 'fim': fim})
