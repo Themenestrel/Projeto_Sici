@@ -4,7 +4,6 @@
 
 {% block conteudo %}
     <div class="container">
-        <div class="row justify-content-md-center">
             <div class="col-sm-4">
                 {% if tipo == None %}
                     <form action='/' method="GET">
@@ -24,8 +23,6 @@
                     <h3><a href="/">Nova Consulta</a></h3>
                 {% endif %}
             </div>
-
-        </div>
 
         <div class="row2">
             {% if dados %}
