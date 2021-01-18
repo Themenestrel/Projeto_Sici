@@ -29,6 +29,7 @@ def home(request):
 
 
 def unidade(request, **kwargs):
+
     if request.method == 'GET':
         if 'data' in request.GET:
             data = request.GET['data'].split('-')
@@ -38,5 +39,8 @@ def unidade(request, **kwargs):
             data_busca = make_aware(datetime(hoje.year, hoje.month, hoje.day) + timedelta(1))
 
         busca = kwargs['cod_ua']
-        dados = Dados.objects.filter(cd_ua=busca, data_criacao_registro__lt=data_busca).last()
+
+
+        dados = Dados.objects.filter(cd_ua=busca, data_criacao_registro__lt=data_busca).order_by('data_criacao_registro').last()
+
         return render(request, 'sici_site/unidade.html', {'dados': dados})
