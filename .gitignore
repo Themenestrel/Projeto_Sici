@@ -1,5 +1,7 @@
 .idea
 __pycache__
+sici/settings.py
 sici_site/__pycache__
 sici_site/migrations
 teste.db
+db.sqlite3
