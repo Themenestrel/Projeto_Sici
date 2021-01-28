@@ -18,9 +18,11 @@ from django.urls import path, re_path
 
 from sici_site.views import home
 from sici_site.views import unidade
+from sici_site.views import geral
 
 urlpatterns = [
     path('', home),
     re_path(r'^unidade/(?P<cod_ua>\d+)/$', unidade),
+    path('geral/', geral),
     path('admin/', admin.site.urls),
 ]
