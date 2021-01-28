@@ -7,9 +7,9 @@
             <div class="col-sm-4">
                 {% if tipo == None %}
                     <form action='/' method="GET">
-                        <label id="texto" for="tipo_consulta">Selecione o Tipo de Consulta</label>
+                        <label id="texto" for="tipo_consulta"></label>
                         <select class="select-css" id="tipo_consulta" name="consulta" onchange="inputTipo(this.value)">
-                            <option disabled selected>--------------------</option>
+                            <option value="" selected hidden>Selecione o Tipo de Consulta</option>
                             <option value="cd_ua">Código da Unidade</option>
                             <option value="nome">Nome da Unidade</option>
                             <option value="titular">Nome do Gestor</option>
@@ -21,6 +21,7 @@
                     </form>
                 {% else %}
                     <h3><a href="/">Nova Consulta</a></h3>
+                    <h3 id="link_consulta_geral"><a href="geral/">Consultar Todos os Registros</a></h3>
                 {% endif %}
             </div>
 
